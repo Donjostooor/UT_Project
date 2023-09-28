@@ -1,23 +1,33 @@
-const express = require('express')
-let bodyParser = require('body-parser')
-const {sequelize} = require('./src/model')
+var express = require('express')
+var cors = require('cors')
+const mysql = require('mysql2');
+const bodyParser = require("body-parser")
 
-const app = express()
+const dbConfig = require("./config/config")
+const adminRouter = require("./controller/admin")
 
+var app = express()
+const port = 8089
+
+/*require('./router/router')(app)*/
+
+var app = express()
+app.use(cors())
+app.use(express.json())
+
+// Create a MySQL connection
+const connection = mysql.createConnection(dbConfig)
+// Connect to the database
+connection.connect((err) => {
+    if (err) throw err;
+    console.log("Connected to the MySQL database")
+});
 app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({extended: true}))
+app.use(bodyParser.urlencoded({extended: false}))
 
-require('./src/routes')(app)
+adminRouter(app, connection);
 
-app.get('/', (req, res) => {
-    res.send('Hello World!')
-})
-
-
-let port = 8081
-
-sequelize.sync({force: false}).then(() => {
-    app.listen(port, function () {
-    console.log('Server running on ' + port)
-    })
-})
+// Start the server
+app.listen(process.env.PORT || port, () => {
+    console.log(`Server is running on http://localhost:${port}`)
+});
