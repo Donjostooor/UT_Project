@@ -14,7 +14,7 @@ app.get('/', (req, res) => {
 })
 
 
-let port = 
+let port = 8081
 
 sequelize.sync({force: false}).then(() => {
     app.listen(port, function () {
