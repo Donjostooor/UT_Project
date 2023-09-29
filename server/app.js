@@ -3,15 +3,17 @@ var cors = require('cors')
 const mysql = require('mysql2');
 const bodyParser = require("body-parser")
 
+// import config 
 const dbConfig = require("./config/config")
+// import controllers
 const adminRouter = require("./controller/admin")
+const menuRouter = require("./controller/menu")
+const modelRouter = require("./controller/model")
+const predictRouter = require("./controller/predict")
+const userRouter = require("./controller/user");
 
 var app = express()
-const port = 8089
-
-/*require('./router/router')(app)*/
-
-var app = express()
+const port = 3036
 app.use(cors())
 app.use(express.json())
 
@@ -25,7 +27,12 @@ connection.connect((err) => {
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended: false}))
 
+// use controller
 adminRouter(app, connection);
+menuRouter(app, connection);
+modelRouter(app, connection);
+predictRouter(app, connection);
+userRouter(app, connection);
 
 // Start the server
 app.listen(process.env.PORT || port, () => {
