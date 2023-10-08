@@ -9,6 +9,16 @@
 /*--------------------------------------------------------------
 # General
 --------------------------------------------------------------*/
+.background{
+  width: 100%;
+  height: 100%;
+  background-image: url('./assets/img/BG-img.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-attachment: fixed;
+}
+
 body {
   font-family: "Open Sans", sans-serif;
   color: #444444;
@@ -22,6 +32,8 @@ a {
 a:hover {
   color: #73c5eb;
   text-decoration: none;
+  scale: 1.05;
+  transition: 0.3s;
 }
 
 h1,
@@ -1827,3 +1839,13 @@ section {
     padding-top: 4px;
   }
 }
+.card:hover {
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+  scale: 1.10;
+  transition: 0.5s;
+}
+
+
+
+
+

@@ -1,16 +1,31 @@
 import { createApp } from 'vue'
+
 // import App
 import App from './App.vue'
+
 // import router
-import router from './plugins/router'
+import router from './router'
+
 // css maintainer
 import './style.css'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-icons/font/bootstrap-icons.css'
+import 'aos/dist/aos.css'
+
 // css argon templace 
 import './assets/css/argon-design-system.css'
+
 // js maintainer
 import bootstrap from 'bootstrap/dist/js/bootstrap.bundle.js'
 
-createApp(App).use(bootstrap)
-createApp(App).use(router).mount('#app')
+// AOS maintain
+import AOS from 'aos/dist/aos.js';
+
+//Tailwind Css
+import "tailwindcss/tailwind.css"
+
+const app = createApp(App)
+app.use(router)
+app.use(bootstrap)
+app.use(AOS.init())
+app.mount('#app')

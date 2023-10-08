@@ -1,19 +1,15 @@
 <template>
-    <!-- ======= NarBarHead =======-->
-
-    <!-- ======= Hero Section ======= -->
-    <section id="hero" class="d-flex align-items-center">
+    <section id="hero" class="background d-flex align-items-center">
         <div class="container">
             <div class="row">
-                <div class="col-lg-7 d-flex flex-column justify-content-center pt-4 pt-lg-0 order-2 order-lg-1"
-                    data-aos="fade-up" data-aos-delay="200">
-                    <h1 class="display-1 mb-0">
+                <div class="col-lg-7">
+                    <h1 class="display-1 mb-0"  data-aos="fade-up">
                         <b>Carbon Footprint Analysis System</b>
                     </h1>
                     <br />
-                    <h2>Using less Carbon is better, Helping to save the world</h2>
-                    <div class="d-flex justify-content-center justify-content-lg-start">
-                        <a href="#" class="btn-get-started"><b>CARBON SCAN</b></a>
+                    <h2 data-aos="fade-up" data-aos-delay="200">Using less Carbon is better, Helping to save the world</h2>
+                    <div data-aos="fade-up" data-aos-delay="800">
+                        <a href="/carbonscan" class="btn-get-started"><b>CARBON SCAN</b></a>
                     </div>
                 </div>
             </div>
@@ -21,10 +17,10 @@
     </section>
     <!-- End Hero -->
     <!-- ======= Card Button About Us Section  ======= -->
-    <div class="section features-1">
+    <div class="section features-1"  >
         <div class="container">
             <div class="row t-how">
-                <div class="col-md mx-auto text-center">
+                <div class="col-md mx-auto text-center" data-aos="fade-up" data-aos-delay="500">
                     <span class="badge badge-pill badge-primary text-uppercase">How to</span>
                     <h2 class="display-2">
                         <i class="bi bi-search">&nbsp;</i>How to use this WebApp?
@@ -36,7 +32,7 @@
             </div>
 
             <div class="row">
-                <div class="col-md-4">
+                <div class="col-md-4" data-aos="fade-right" data-aos-delay="700">
                     <div class="info card">
                         <img src="https://i.pinimg.com/originals/21/80/1f/21801f4aaed85514b1d0f0c1f8fea275.gif"
                             class="card-img-top" alt="..." />
@@ -54,7 +50,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-4" data-aos="fade-right" data-aos-delay="900">
                     <div class="info card">
                         <img src="https://i.pinimg.com/originals/21/80/1f/21801f4aaed85514b1d0f0c1f8fea275.gif"
                             class="card-img-top" alt="..." />
@@ -73,7 +69,7 @@
                     </div>
                 </div>
 
-                <div class="col-md-4">
+                <div class="col-md-4" data-aos="fade-right" data-aos-delay="1100">
                     <div class="info card">
                         <img src="https://i.pinimg.com/originals/21/80/1f/21801f4aaed85514b1d0f0c1f8fea275.gif"
                             class="card-img-top" alt="..." />
@@ -97,10 +93,10 @@
     <!-- Card Button About Us Section -->
     <!-- ======= Benefits of this WebApp Section ======= -->
     <section id="why-us" class="why-us section-bg">
-        <div class="container-fluid" data-aos="fade-up">
+        <div class="container-fluid">
             <div class="row">
                 <div class="col-lg-7 d-flex flex-column justify-content-center align-items-stretch order-2 order-lg-1">
-                    <div class="content text-center">
+                    <div class="content text-center" data-aos="fade-in" data-aos-delay="500">
                         <span class="badge badge-pill badge-success text-uppercase">Benefits</span>
                         <h2 class="display-2">
                             <i class="bi bi-rocket-takeoff-fill">&nbsp;</i>Benefits of this
@@ -110,15 +106,15 @@
                     </div>
                     <div class="accordion-list">
                         <ul>
-                            <li>
+                            <li data-aos="flip-down" data-aos-delay="500">
                                 <p>
                                     <span>01</span>แสดงค่า Carbon Footprint ในอาหารแต่ล่ะรายการได้
                                 </p>
                             </li>
-                            <li>
+                            <li data-aos="flip-down" data-aos-delay="700">
                                 <p><span>02</span>สร้างจิตสำนึกให้รักสิ่งแวดล้อม</p>
                             </li>
-                            <li>
+                            <li data-aos="flip-down" data-aos-delay="900">
                                 <p>
                                     <span>03</span>ช่วยลดประมาณคาร์บอนไดออกไซด์โดยเริ่มจากกลุ่มขนาดเล็กได้
                                 </p>
@@ -126,7 +122,7 @@
                         </ul>
                     </div>
                 </div>
-                <div class="col-md-5 align-items-stretch order-1 order-lg-2 img">
+                <div class="col-md-5 align-items-stretch order-1 order-lg-2 img" data-aos="fade-left" data-aos-delay="1100">
                     &nbsp;
                     <img src="src/assets/img/Benefits-img.png" class="Bene-img" />
                 </div>
@@ -136,71 +132,73 @@
     <!-- End Benefits of this WebApp Section -->
     <!-- ======= Food list supported Section ======= -->
     <div class="section features-2">
-        <div class="container">
+        <div class="container-fluid">
             <div class="row t-how">
-                <div class="col-md mx-auto text-center">
+                <div class="col-md mx-auto text-center" data-aos="fade-up" data-aos-delay="500">
                     <span class="badge badge-pill badge-warning text-uppercase">Food list</span>
                     <h2 class="display-2">
                         <i class="bi bi-egg-fried">&nbsp;</i>Food list supported
                     </h2>
-                    <p class="lead">
+                    <p class="lead" data-aos="fade-up" data-aos-delay="900">
                         "ทุกมื้ออาหารเป็นโอกาสพิเศษในการสร้างความรักและความทรงจำที่ดี."
                         <br />
                         Rachael Ray
                     </p>
                 </div>
                 <!-- ======= col Foodlist ======== -->
-                <div class="row r-food">
+                <div class="row">
                     <div class="foodlist">
-                        <div class="col-md-4 food-card" v-for="(card, index) in foodCards" :key="index">
-                            <img :src="card.imageSrc" class="card-img-top" :alt="card.altText" />
-                            <div class="food-body">
-                                <h4 class="food-title display-4">{{ card.cardTitle }}</h4>
-                                <p class="food-text">{{ card.cardText }}</p>
+                        <div class="col-md-4" v-for="(card, index) in menu" :key="index" data-aos="fade-up">
+                            <div class="col bt">
+                                <div class="food-card">
+                                <img :src="card.f_img" class="card-img-food"/>
+                                <div class="food-body">
+                                    <h4 class="food-title display-4">{{ card.f_name }}</h4>
+                                </div>
+                            </div>
                             </div>
                         </div>
                     </div>
                 </div>
+                <!-- ======= End col Foodlist ======== -->
             </div>
         </div>
     </div>
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
     data() {
         return {
-            foodCards: [
-                {
-                    imageSrc: "https://i.pinimg.com/originals/21/80/1f/21801f4aaed85514b1d0f0c1f8fea275.gif",
-                    altText: "Food Image 1",
-                    cardTitle: "Card title 1",
-                    cardText: "Some quick example text for card 1.",
-                },
-                {
-                    imageSrc: "https://i.pinimg.com/originals/21/80/1f/21801f4aaed85514b1d0f0c1f8fea275.gif",
-                    altText: "Food Image 2",
-                    cardTitle: "Card title 2",
-                    cardText: "Some quick example text for card 2.",
-                },
-                {
-                    imageSrc: "https://i.pinimg.com/originals/21/80/1f/21801f4aaed85514b1d0f0c1f8fea275.gif",
-                    altText: "Food Image 3",
-                    cardTitle: "Card title 3",
-                    cardText: "Some quick example text for card 3.",
-                },                
-                {
-                    imageSrc: "image4.jpg",
-                    altText: "Food Image 4",
-                    cardTitle: "Card title 4",
-                    cardText: "Some quick example text for card 4.",
-                },
-                // Add more card objects as needed
-            ],
+            menu: [],
+            f_name: [],
+            f_img: [],
         };
     },
+    mounted() {
+        // Make a GET request to your API endpoint
+        axios
+            .get("http://localhost:3036/menu") // Update the URL as needed
+            .then((response) => {
+                // Assuming the response.data is an array of objects
+                this.menu = response.data;
+                // Assuming 'f_name' and 'f_img' properties exist in each object
+                this.f_name = response.data.map((item) => item.f_name);
+                this.f_img = response.data.map((item) => item.f_img);
+                //console.log(this.menu);
+                //console.log(this.f_name);
+                //console.log(this.f_img);
+            })
+            .catch((error) => {
+                console.error(error);
+            });
+    },
 };
+
 </script>
+
 <style scoped>
 .Bene-img {
     width: 100%;
@@ -211,8 +209,21 @@ export default {
 
 .card-img-top {
     width: 100%;
-    height: 20vh;
+    height: 15vh;
     object-fit: cover;
+}
+.card-img-food {
+    width: 100%;
+    height: 25vh;
+    object-fit: cover;
+    align-items: center;
+}
+.card-img-food:hover {
+    width: 100%;
+    height: 35vh;
+    object-fit: cover;
+    align-items: center;
+    transition: 0.5s;
 }
 
 .t-how {
@@ -225,21 +236,31 @@ export default {
     padding: 40px 15px 0px 15px;
     box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.25);
 }
+
 .food-card {
-    border-radius: 10px;
+    border-radius: 6px;
     box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.25);
+    padding: 40px 15px 15px 15px;
     padding-top: 20px;
+}
+.food-card:hover {
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+    scale: 0.90;
+    transition: 0.5s;
 }
 
 .food-body {
-    padding: 40px 15px 0px 15px;
-    padding-top: 20px;
+    text-align: center;
+    padding: 20px 15px 0px 15px;
 }
 
+.bt {
+    padding-bottom: 50px;
+}
 .foodlist {
+    padding: 5vh 5vh 5vh 5vh;
     display: flex;
-    flex-wrap: wrap;
+    flex-wrap:wrap-reverse;
     justify-content:space-between;
-    align-items: center;
 }
 </style>
