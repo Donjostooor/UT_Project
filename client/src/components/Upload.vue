@@ -3,11 +3,11 @@
         <div class="row">
             <!-- Pick Your images-->
             <div class="col-12">
-                <div class="col-12">
+                <div class="col-12" data-aos="zoom-out">
                     <h5><strong>Upload your File :</strong></h5>
                 </div>
                 <div class="drag-area" :class="{ active: isDragActive }" @dragover.prevent="onDragOver"
-                    @dragleave="onDragLeave" @drop="onDrop">
+                    @dragleave="onDragLeave" @drop="onDrop" data-aos="zoom-out">
                     <div v-if="imageSrc === null" class="icon">
                         <i class="bi bi-images"></i>
                     </div>
@@ -149,7 +149,7 @@
                 <div class="modal-dialog modal-lg modal-dialog-centered">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalToggleLabel">Result</h5>
+                            <h4 class="modal-title" id="exampleModalToggleLabel">&nbsp;&nbsp;<strong>Result</strong></h4>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
@@ -161,8 +161,8 @@
                                             <!-- image,foodname -->
                                             <div class="col-8">
                                                 <!-- image -->
-                                                <div class="col-12">
-                                                    <img class="img-scan" :src="imageSrc" alt="Uploaded Image" />
+                                                <div class="col-12 text-center">
+                                                    <img class="img-scan" :src="imageSrc" alt="Uploaded Image"  />
                                                 </div>
                                                 <!-- foodname -->
                                                 <div class="col-12 text-center">
@@ -186,7 +186,7 @@
                                                         <p>CarbonFootPrint Value<sub>(cfp)</sub></p>
                                                     </div>
                                                     <div class="col-12">
-                                                        <h1><strong>{{ maxProbability * 100 }}</strong></h1>
+                                                        <h1><strong>{{ from.pd_carbon }}</strong></h1>
                                                     </div>
                                                     <div class="col-12">
                                                         <p>KgCO<sub>2</sub>e</p>
@@ -209,15 +209,32 @@
                                             </div>
                                             <!-- btn -->
                                             <div class="col-12 d-flex justify-content-center">
-                                                <button type="button" class="col-6 btn btn-success" data-bs-dismiss="modal"
-                                                    @click="">Save</button>
-                                                <button type="button" class="col-6 btn btn-secondary"
+                                                <button type="button" class="col-5 btn btn-success" data-bs-target="#SaveSuccess" data-bs-toggle="modal" data-bs-dismiss="modal" @click="onSetupFrom">Save</button>
+                                                <div class="col-1">&nbsp;</div>
+                                                <button type="button" class="col-5 btn btn-secondary"
                                                     data-bs-dismiss="modal" @click="onCloseAllValue">Close</button>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal fade" id="SaveSuccess" aria-hidden="true" aria-labelledby="SaveSuccess"
+                tabindex="-1">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title" id="SaveSuccess"><strong>Result</strong></h4>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <h4>Your results in this list are now saved in your account.</h4>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-bs-dismiss="modal">Close</button>
                         </div>
                     </div>
                 </div>
@@ -242,21 +259,35 @@ import axios from "axios";
 export default {
     data() {
         return {
+            //in post
+            from: {
+                pd_userid: 1,
+                pd_name: "",
+                pd_code: "",
+                pd_carbon: 0,
+                pd_predict: 0,
+                pd_year: new Date().getFullYear(),
+                pd_date: new Date().toISOString().split('T')[0],
+                pd_time: new Date().toLocaleTimeString(),
+                pd_img: null,
+            },
+            //in Process
             isDragActive: false,
             dragText: "Drag & Drop",
             imageSrc: null,
             maxClassName: "",
             maxProbability: 0,
+            // axios get data
             m_model: [],
             f_code: [],
             f_name: [],
-            //show value
+            f_carbon: [],
+            ///show value
             list: [],
             FoodName: [],
             Prediction: [],
             showValue: false,
             showOption: false,
-
         };
     },
     methods: {
@@ -412,6 +443,37 @@ export default {
             await this.onCloseOption(event);
             console.log("delete Working..");
         },
+        async onSetupFrom(event) {
+            //set pd_carbon
+            let pd_carbon = 0;
+            for (let j = 0; j < this.f_code.length; j++) {
+                for (let i = 0; i < this.f_name.length; i++) {
+                    if (this.maxClassName === this.f_name[i]) {
+                        pd_carbon = this.f_carbon[i];
+                        break; // Exit the loop once a match is found
+                    }
+                }
+            }
+            console.log("pd_carbon:", pd_carbon);
+
+            this.from.pd_userid = 1;
+            this.from.pd_name = this.maxClassName;
+            this.from.pd_code = this.f_code[this.FoodName.indexOf(this.maxClassName)];
+            this.from.pd_carbon = pd_carbon;
+            this.from.pd_predict = parseFloat(this.maxProbability) * 100;
+
+            await this.onSubmitPrediction(event);
+        },
+
+        onSubmitPrediction() {
+            axios.post('http://localhost:3036/predict/new_value', this.from)
+                .then(function (response) {
+                    console.log(response);
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+        },
     },
     mounted() {
         axios.get("http://localhost:3036/model")
@@ -430,6 +492,8 @@ export default {
                 this.menu = response.data;
                 this.f_code = response.data.map((item) => item.f_code);
                 this.f_name = response.data.map((item) => item.f_name);
+                this.f_carbon = response.data.map((item) => item.f_carbon);
+
                 console.log("import menu completed");
             })
     }
