@@ -1,7 +1,6 @@
 <template>
     <div class="container">
         <div class="row">
-
             <!-- Pick Your images-->
             <div class="col-12">
                 <div class="col-12">
@@ -38,10 +37,9 @@
                 <div class="col-12 sc-result d-flex justify-content-between">
                     <h5><strong>Result your image :</strong></h5>
                     <!-- btn Show Prediction-->
-                    <button v-if="imageSrc && showValue === false" class="btn btn-primary" type="button"
-                        @click="onShowAllValue">All Value Prediction</button>
-                    <button v-if="showValue === true" class="btn btn-default" type="button" @click="onCloseAllValue">Hide
-                        Value</button>
+                    <button v-if="imageSrc" class="btn btn-primary" type="button" data-bs-toggle="modal"
+                        data-bs-target="#exampleModal" @click="onShowAllValue">All Value
+                        Prediction</button>
                 </div>
                 <div class="sc-result-topic">
 
@@ -61,17 +59,20 @@
                     <!-- Show Result Body -->
                     <div class="col-12 sc-result-body">
                         <div class="col-1 p-2">
-                            <h5><strong> 1. </strong></h5>
+                            <h5><strong></strong></h5>
                         </div>
                         <div class="col-7">
                             <h5 v-if="showOption === false"><strong>{{ maxClassName }}</strong></h5>
-                            <select v-if="showOption === true" id="option-Fname" name="option-Fname" class="form-select form-select-lg" aria-label=".form-select-lg example" @change="onOptionChange($event)">
+                            <select v-if="showOption === true" id="option-Fname" name="option-Fname"
+                                class="form-select form-select" aria-label=".form-select-lg example"
+                                @change="onOptionChange($event)">
                                 <option :value="maxClassName" selected>{{ maxClassName }}</option>
-                                <option v-for="(foodName, index) in FoodName" :key="index" :value="foodName">{{ foodName }}</option>                                 
+                                <option v-for="(foodName, index) in FoodName" :key="index" :value="foodName">{{ foodName }}
+                                </option>
                             </select>
                         </div>
-                        <div class="col-4 p-2">
-                            <h5 >&nbsp;<strong>{{ maxProbability * 100 }}</strong></h5>
+                        <div class="col-4">
+                            <h5>&nbsp;<strong>{{ maxProbability * 100 }}</strong></h5>
                         </div>
                     </div>
                 </div>
@@ -80,51 +81,157 @@
                         <hr class="" color="blue" width="90%" style="border-width: 3px;">
                     </div>
                     <div class="col-12 d-flex justify-content-center">
-                        <button class="btn btn-success" type="button">Correct,start calculating.</button>
-                        <button class="btn btn-danger" type="button" @click="onShowOption">No, picture is incorrect.</button>
+                        <button class="btn btn-success" type="button" data-bs-toggle="modal"
+                            data-bs-target="#CarbonValue">Correct,start calculating.</button>
+                        <button class="btn btn-danger" type="button" @click="onShowOption">No, picture is
+                            incorrect.</button>
                     </div>
                 </div>
 
-                <!-- Show Table Prediction -->
-                <div v-if="showValue === true" class="sc-result-topic">
-                    <!-- Show Result Head -->
-                    <div class="col-12 sc-result-head">
-                        <div class="col-1">
-                            <p>List</p>
-                        </div>
-                        <div class="col-7">
-                            <p><strong>FoodName</strong></p>
-                        </div>
-                        <div class="col-4">
-                            <p><strong>Prediction Value <span>%</span></strong></p>
-                        </div>
-                    </div>
-                    <!-- Show Result Body -->
-                    <div class="col-12 sc-result-body">
-                        <div class="col-1">
-                            <div class="col-12" v-for="(item, index) in list" :key="index">
-                                <h5><strong>{{ item }}</strong></h5>
+                <!-- Modal -->
+                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog modal-xl">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Table of Prediction</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                                    @click="onCloseAllValue"></button>
                             </div>
-                        </div>
-                        <div class="col-7">
-                            <div class="col-12" v-for="(foodName, index) in FoodName" :key="index">
-                                <h5><strong>{{ foodName }}</strong></h5>
+                            <div class="modal-body">
+                                <!-- Show Table Prediction -->
+                                <div>
+                                    <!-- Show Result Head -->
+                                    <div class="col-12 sc-result-head">
+                                        <div class="col-1">
+                                            <p>List</p>
+                                        </div>
+                                        <div class="col-7">
+                                            <p><strong>FoodName</strong></p>
+                                        </div>
+                                        <div class="col-4">
+                                            <p><strong>Prediction Value <span>%</span></strong></p>
+                                        </div>
+                                    </div>
+                                    <!-- Show Result Body -->
+                                    <div class="col-12 sc-result-body">
+                                        <div class="col-1">
+                                            <div class="col-12" v-for="(item, index) in list" :key="index">
+                                                <h5><strong>{{ item }}</strong></h5>
+                                            </div>
+                                        </div>
+                                        <div class="col-7">
+                                            <div class="col-12" v-for="(foodName, index) in FoodName" :key="index">
+                                                <h5><strong>{{ foodName }}</strong></h5>
+                                            </div>
+                                        </div>
+                                        <div class="col-4">
+                                            <div class="col-12" v-for="(prediction, index) in Prediction" :key="index">
+                                                <h5><strong>{{ prediction }}</strong></h5>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- End Show Table Prediction -->
                             </div>
-                        </div>
-                        <div class="col-4">
-                            <div class="col-12" v-for="(prediction, index) in Prediction" :key="index">
-                                <h5><strong>{{ prediction }}</strong></h5>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+                                    @click="onCloseAllValue">Close</button>
                             </div>
                         </div>
                     </div>
                 </div>
-                <!-- End Show Table Prediction -->
             </div>
             <!-- End Show Result Your image -->
-
+            <!-- Popup Result CarbonValue -->
+            <div class="modal fade" id="CarbonValue" aria-hidden="true" aria-labelledby="exampleModalToggleLabel"
+                tabindex="-1">
+                <div class="modal-dialog modal-lg modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalToggleLabel">Result</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-12 ">
+                                        <!-- image,foodname,prediction,carbonvalue -->
+                                        <div class="col-12 d-flex justify-content-center">
+                                            <!-- image,foodname -->
+                                            <div class="col-8">
+                                                <!-- image -->
+                                                <div class="col-12">
+                                                    <img class="img-scan" :src="imageSrc" alt="Uploaded Image" />
+                                                </div>
+                                                <!-- foodname -->
+                                                <div class="col-12 text-center">
+                                                    <h5><strong>{{ maxClassName }}</strong></h5>
+                                                </div>
+                                            </div>
+                                            <!-- prediction,carbonvalue -->
+                                            <div class="col-4">
+                                                <!-- prediction -->
+                                                <div class="col-12 ">
+                                                    <div class="col-12">
+                                                        <p>Predict</p>
+                                                    </div>
+                                                    <div class="col-12">
+                                                        <h1><strong>{{ maxProbability * 100 }} %</strong></h1>
+                                                    </div>
+                                                </div>
+                                                <!-- carbonvalue -->
+                                                <div class="col-12">
+                                                    <div class="col-12">
+                                                        <p>CarbonFootPrint Value<sub>(cfp)</sub></p>
+                                                    </div>
+                                                    <div class="col-12">
+                                                        <h1><strong>{{ maxProbability * 100 }}</strong></h1>
+                                                    </div>
+                                                    <div class="col-12">
+                                                        <p>KgCO<sub>2</sub>e</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <div class="col-12 d-flex justify-content-center">
+                                                <hr class="" color="blue" width="90%" style="border-width: 3px;">
+                                            </div>
+                                        </div>
+                                        <!-- year,date,time,btn -->
+                                        <div class="col-12">
+                                            <!-- year,date,time -->
+                                            <div class="col-12 d-flex justify-content-center">
+                                                <!-- year -->
+                                                <!-- date -->
+                                                <!-- time -->
+                                            </div>
+                                            <!-- btn -->
+                                            <div class="col-12 d-flex justify-content-center">
+                                                <button type="button" class="col-6 btn btn-success" data-bs-dismiss="modal"
+                                                    @click="">Save</button>
+                                                <button type="button" class="col-6 btn btn-secondary"
+                                                    data-bs-dismiss="modal" @click="onCloseAllValue">Close</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- EndPopup Result Carbonfootprint -->
             <!-- About Support -->
             <div v-if="imageSrc" class="col-12 d-flex justify-content-center ">
                 <span class="support-by">power by Teachable machine</span>
+            </div>
+            <div class="col-12 btn-sc-back d-flex justify-content-center">
+                <div class="col-6">
+                    <router-link to="/"><button class="btn btn-default btn-block" type="button">Back to
+                            Home</button></router-link>
+                </div>
             </div>
         </div>
     </div>
@@ -149,6 +256,7 @@ export default {
             Prediction: [],
             showValue: false,
             showOption: false,
+
         };
     },
     methods: {
@@ -169,21 +277,29 @@ export default {
             this.showOption = true
             console.log("ShowOption Working..");
         },
+        onCloseOption(event) {
+            event.preventDefault();
+            this.showOption = false
+            console.log("CloseOption Working..");
+        },
         onOptionChange(event) {
             const Fname = event.target.value;
             let optionPD = 0;
+            let optionN = "";
             console.log(event.target.value);
             // convert f_code to f_name
             for (let j = 0; j < this.f_name.length; j++) {
-                    if (Fname === this.FoodName[j]) {
-                        optionPD = this.Prediction[j]
-                        console.log("OptionChange Working..");
-                        /*console.log(Fname);
-                        console.log(this.FoodName[j]);
-                        console.log(optionPD);*/
-                    }
+                if (Fname === this.FoodName[j]) {
+                    optionN = this.FoodName[j]
+                    optionPD = this.Prediction[j]
+                    console.log("OptionChange Working..");
+                    /*console.log(Fname);
+                    console.log(this.FoodName[j]);
+                    console.log(optionPD);*/
+                }
             }
             this.maxProbability = optionPD;
+            this.maxClassName = optionN
         },
 
         async browseFile() {
@@ -289,10 +405,11 @@ export default {
             this.maxClassName = maxName;
             this.maxProbability = maxProbability.toFixed(3);
         },
-        deleteImage() {
+        async deleteImage(event) {
             this.imageSrc = null;
             this.maxClassName = "";
             this.maxProbability = 0;
+            await this.onCloseOption(event);
             console.log("delete Working..");
         },
     },

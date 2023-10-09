@@ -131,72 +131,14 @@
     </section>
     <!-- End Benefits of this WebApp Section -->
     <!-- ======= Food list supported Section ======= -->
-    <div class="section features-2">
-        <div class="container-fluid">
-            <div class="row t-how">
-                <div class="col-md mx-auto text-center" data-aos="fade-up" data-aos-delay="500">
-                    <span class="badge badge-pill badge-warning text-uppercase">Food list</span>
-                    <h2 class="display-2">
-                        <i class="bi bi-egg-fried">&nbsp;</i>Food list supported
-                    </h2>
-                    <p class="lead" data-aos="fade-up" data-aos-delay="900">
-                        "ทุกมื้ออาหารเป็นโอกาสพิเศษในการสร้างความรักและความทรงจำที่ดี."
-                        <br />
-                        Rachael Ray
-                    </p>
-                </div>
-                <!-- ======= col Foodlist ======== -->
-                <div class="row">
-                    <div class="foodlist">
-                        <div class="col-md-4" v-for="(card, index) in menu" :key="index" data-aos="fade-up">
-                            <div class="col bt">
-                                <div class="food-card">
-                                <img :src="card.f_img" class="card-img-food"/>
-                                <div class="food-body">
-                                    <h4 class="food-title display-4">{{ card.f_name }}</h4>
-                                </div>
-                            </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- ======= End col Foodlist ======== -->
-            </div>
-        </div>
-    </div>
+    <section>
+        <FoodSupport />
+    </section>
+    <!-- ======= End Food list supported Section ======= -->
 </template>
 
-<script>
-import axios from "axios";
-
-export default {
-    data() {
-        return {
-            menu: [],
-            f_name: [],
-            f_img: [],
-        };
-    },
-    mounted() {
-        // Make a GET request to your API endpoint
-        axios
-            .get("http://localhost:3036/menu") // Update the URL as needed
-            .then((response) => {
-                // Assuming the response.data is an array of objects
-                this.menu = response.data;
-                // Assuming 'f_name' and 'f_img' properties exist in each object
-                this.f_name = response.data.map((item) => item.f_name);
-                this.f_img = response.data.map((item) => item.f_img);
-                //console.log(this.menu);
-                //console.log(this.f_name);
-                //console.log(this.f_img);
-            })
-            .catch((error) => {
-                console.error(error);
-            });
-    },
-};
-
+<script setup>
+    import FoodSupport from '../components/AboutFood.vue'
 </script>
 
 <style scoped>

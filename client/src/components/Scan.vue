@@ -12,7 +12,7 @@
                 <!-- Upload and Prediction file -->
                 <div class="col-12 sc-context">
                     <br>
-                    <Upload/>
+                    <Upload />
                 </div>
                 <!-- End Upload and Prediction file -->
                 <!-- ReCheck -->
@@ -26,42 +26,16 @@
     </section>
     <!-- ======= Food list supported Section ======= -->
     <section>
-        <div class="container-fluid">
-            <div class="row t-how">
-                <div class="col-md mx-auto text-center" data-aos="fade-up" data-aos-delay="500">
-                    <span class="badge badge-pill badge-warning text-uppercase">Food list</span>
-                    <h2 class="display-2">
-                        <i class="bi bi-egg-fried">&nbsp;</i>Food list supported
-                    </h2>
-                    <p class="lead" data-aos="fade-up" data-aos-delay="900">
-                        "ทุกมื้ออาหารเป็นโอกาสพิเศษในการสร้างความรักและความทรงจำที่ดี."
-                        <br />
-                        Rachael Ray
-                    </p>
-                </div>
-                <!-- ======= col Foodlist ======== -->
-                <div class="row">
-                    <div class="foodlist">
-                        <div class="col-md-4" v-for="(card, index) in menu" :key="index" data-aos="fade-up">
-                            <div class="col bt">
-                                <div class="food-card">
-                                    <img :src="card.f_img" class="card-img-food" />
-                                    <div class="food-body">
-                                        <h4 class="food-title display-4">{{ card.f_name }}</h4>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- ======= End col Foodlist ======== -->
-            </div>
+        <div class="container">
+            <FoodSupport />
         </div>
     </section>
+    <!-- ======= End Food list supported Section ======= -->
 </template>
 
 <script setup>
-    import Upload from '../components/Upload.vue'
+import Upload from '../components/Upload.vue'
+import FoodSupport from '../components/AboutFood.vue'
 </script>
 
 <!-- ====== Css ====== -->
@@ -144,7 +118,7 @@
 .btn-scan {
     padding: 5vh 0 0vh 0;
     text-align: center;
-    
+
 }
 
 .support-by {
@@ -153,7 +127,7 @@
     margin: 10px 0 15px 0;
 }
 
-.sc-result{
+.sc-result {
     padding: 5vh 5vh 5vh 5vh;
 }
 
@@ -162,11 +136,13 @@
     border-radius: 10px;
     padding: 15px 5px 5px 5px;
 }
+
 .sc-result-head {
     display: flex;
     align-items: center;
     justify-content: center;
 }
+
 .sc-result-body {
     padding-bottom: 2vh;
     display: flex;
@@ -176,5 +152,10 @@
 .showmore {
     padding-top: 3vh;
     text-align: center;
+}
+
+.btn-sc-back {
+    padding: 0vh 10vh 5vh 10vh;
+    color: red;
 }
 </style>
