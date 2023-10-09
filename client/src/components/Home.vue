@@ -1,14 +1,15 @@
 <template>
+    <Loading />
     <section id="hero" class="background d-flex align-items-center">
         <div class="container">
             <div class="row">
                 <div class="col-lg-7">
-                    <h1 class="display-1 mb-0"  data-aos="fade-up">
+                    <h1 class="display-1 mb-0"  data-aos="fade-up" data-aos-delay="1700">
                         <b>Carbon Footprint Analysis System</b>
                     </h1>
                     <br />
-                    <h2 data-aos="fade-up" data-aos-delay="200">Using less Carbon is better, Helping to save the world</h2>
-                    <div data-aos="fade-up" data-aos-delay="800">
+                    <h2 data-aos="fade-up" data-aos-delay="1700">Using less Carbon is better, Helping to save the world</h2>
+                    <div data-aos="fade-up" data-aos-delay="2200">
                         <a href="/carbonscan" class="btn-get-started"><b>CARBON SCAN</b></a>
                     </div>
                 </div>
@@ -139,6 +140,7 @@
 
 <script setup>
     import FoodSupport from '../components/AboutFood.vue'
+    import Loading from '../view/Loading.vue'
 </script>
 
 <style scoped>

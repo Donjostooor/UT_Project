@@ -21,7 +21,7 @@
                                 <div class="food-card">
                                 <img :src="card.f_img" class="card-img-food"/>
                                 <div class="food-body">
-                                    <h4 class="food-title display-4">{{ card.f_name }}</h4>
+                                    <h4 class="food-title mb-0"><strong>{{ card.f_name }}</strong></h4>
                                 </div>
                             </div>
                             </div>

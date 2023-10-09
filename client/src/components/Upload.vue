@@ -246,7 +246,7 @@
             </div>
             <div class="col-12 btn-sc-back d-flex justify-content-center">
                 <div class="col-6">
-                    <router-link to="/"><button class="btn btn-default btn-block" type="button">Back to
+                    <router-link to="/"><button class="btn btn-default btn-block" type="button"> Back to
                             Home</button></router-link>
                 </div>
             </div>

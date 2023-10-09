@@ -1,10 +1,11 @@
 <template>
+    <Loading />
     <section id="scan" class="background d-flex">
         <div class="container background-scan">
             <div class="row">
                 <!-- Hero -->
                 <div class="col-12 topic-scan">
-                    <h1 class="heading-1 mb-0">
+                    <h1 class="heading-1 mb-0" data-aos="zoom-out" data-aos-delay="1500">
                         <strong>Carbon Footprint Analysis System</strong>
                     </h1>
                 </div>
@@ -36,6 +37,7 @@
 <script setup>
 import Upload from '../components/Upload.vue'
 import FoodSupport from '../components/AboutFood.vue'
+import Loading from '../view/Loading.vue'
 </script>
 
 <!-- ====== Css ====== -->
