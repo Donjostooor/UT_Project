@@ -1,9 +1,5 @@
 import { createApp } from 'vue'
-
-// import App
 import App from './App.vue'
-
-// import router
 import router from './router'
 
 // css maintainer
@@ -21,8 +17,6 @@ import bootstrap from 'bootstrap/dist/js/bootstrap.bundle.js'
 // AOS maintain
 import AOS from 'aos/dist/aos.js';
 
-//Tailwind Css
-import "tailwindcss/tailwind.css"
 
 const app = createApp(App)
 app.use(router)

@@ -1,9 +1,12 @@
 <template>
     <Loading />
+    <Navbar />
     <section id="scan" class="background d-flex">
-        <div class="container background-scan">
+        <div class="container ">
             <div class="row">
-                <!-- Hero -->
+                
+                <div class="col-12 background-scan">
+                    <!-- Hero -->
                 <div class="col-12 topic-scan">
                     <h1 class="heading-1 mb-0" data-aos="zoom-out" data-aos-delay="1500">
                         <strong>Carbon Footprint Analysis System</strong>
@@ -16,28 +19,22 @@
                     <Upload />
                 </div>
                 <!-- End Upload and Prediction file -->
-                <!-- ReCheck -->
-
-                <!-- End ReCheck -->
-                <!-- Popup -->
-                <!-- Popup Result -->
-                <!-- End Popup Result -->
+                </div>
             </div>
         </div>
     </section>
-    <!-- ======= Food list supported Section ======= -->
-    <section>
-        <div class="container">
-            <FoodSupport />
-        </div>
-    </section>
-    <!-- ======= End Food list supported Section ======= -->
+    <Footer />
 </template>
 
 <script setup>
+import Loading from '/src/view/Loading.vue';
+import Navbar from '/src/components/Nav/Navbar.vue';
+import Footer from '/src/components/Nav/Footer.vue';
 import Upload from '../components/Upload.vue'
-import FoodSupport from '../components/AboutFood.vue'
-import Loading from '../view/Loading.vue'
+window.scrollTo(0, 0);
+    window.onbeforeunload = function () {
+    window.scrollTo(0, 0);
+}
 </script>
 
 <!-- ====== Css ====== -->
@@ -160,4 +157,5 @@ import Loading from '../view/Loading.vue'
     padding: 0vh 10vh 5vh 10vh;
     color: red;
 }
+
 </style>

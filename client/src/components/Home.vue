@@ -1,10 +1,11 @@
 <template>
     <Loading />
+    <Navbar />
     <section id="hero" class="background d-flex align-items-center">
         <div class="container">
             <div class="row">
                 <div class="col-lg-7">
-                    <h1 class="display-1 mb-0"  data-aos="fade-up" data-aos-delay="1700">
+                    <h1 class="display-1 mb-0" data-aos="fade-up" data-aos-delay="1700">
                         <b>Carbon Footprint Analysis System</b>
                     </h1>
                     <br />
@@ -13,12 +14,13 @@
                         <a href="/carbonscan" class="btn-get-started"><b>CARBON SCAN</b></a>
                     </div>
                 </div>
+                <div class="col-lg-5"></div>
             </div>
         </div>
     </section>
     <!-- End Hero -->
     <!-- ======= Card Button About Us Section  ======= -->
-    <div class="section features-1"  >
+    <!-- <div class="section features-1"  >
         <div class="container">
             <div class="row t-how">
                 <div class="col-md mx-auto text-center" data-aos="fade-up" data-aos-delay="500">
@@ -91,6 +93,7 @@
             </div>
         </div>
     </div>
+    -->
     <!-- Card Button About Us Section -->
     <!-- ======= Benefits of this WebApp Section ======= -->
     <section id="why-us" class="why-us section-bg">
@@ -135,12 +138,19 @@
     <section>
         <FoodSupport />
     </section>
+    <Footer />
     <!-- ======= End Food list supported Section ======= -->
 </template>
 
 <script setup>
-    import FoodSupport from '../components/AboutFood.vue'
-    import Loading from '../view/Loading.vue'
+import Loading from '/src/view/Loading.vue';
+import Navbar from '/src/components/Nav/Navbar.vue';
+import Footer from '/src/components/Nav/Footer.vue';
+import FoodSupport from '../components/AboutFood.vue'
+window.scrollTo(0, 0);
+window.onbeforeunload = function () {
+    window.scrollTo(0, 0);
+}
 </script>
 
 <style scoped>
@@ -156,55 +166,14 @@
     height: 15vh;
     object-fit: cover;
 }
-.card-img-food {
-    width: 100%;
-    height: 25vh;
-    object-fit: cover;
-    align-items: center;
-}
-.card-img-food:hover {
-    width: 100%;
-    height: 35vh;
-    object-fit: cover;
-    align-items: center;
-    transition: 0.5s;
-}
 
 .t-how {
     padding-bottom: 5vh;
 }
 
 .info {
-    background-color: #f4f6f7;
     border-radius: 20px;
     padding: 40px 15px 0px 15px;
-    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.25);
-}
-
-.food-card {
-    border-radius: 6px;
-    box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.25);
-    padding: 40px 15px 15px 15px;
-    padding-top: 20px;
-}
-.food-card:hover {
-    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
-    scale: 0.90;
-    transition: 0.5s;
-}
-
-.food-body {
-    text-align: center;
-    padding: 20px 15px 0px 15px;
-}
-
-.bt {
-    padding-bottom: 50px;
-}
-.foodlist {
-    padding: 5vh 5vh 5vh 5vh;
-    display: flex;
-    flex-wrap:wrap-reverse;
-    justify-content:space-between;
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
 }
 </style>

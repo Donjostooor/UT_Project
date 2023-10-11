@@ -2,12 +2,12 @@
     <div class="section features-2">
         <div class="container-fluid">
             <div class="row t-how">
-                <div class="col-md mx-auto text-center" data-aos="fade-up" data-aos-delay="500">
+                <div class="col-md mx-auto text-center" data-aos="fade-up" data-aos-delay="300">
                     <span class="badge badge-pill badge-warning text-uppercase">Food list</span>
                     <h2 class="display-2">
                         <i class="bi bi-egg-fried">&nbsp;</i>Food list supported
                     </h2>
-                    <p class="lead" data-aos="fade-up" data-aos-delay="900">
+                    <p class="lead" data-aos="fade-up" data-aos-delay="700">
                         "ทุกมื้ออาหารเป็นโอกาสพิเศษในการสร้างความรักและความทรงจำที่ดี."
                         <br />
                         Rachael Ray
@@ -86,7 +86,7 @@ export default {
 }
 .food-card:hover {
     box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
-    scale: 0.90;
+    scale: 0.99;
     transition: 0.5s;
 }
 

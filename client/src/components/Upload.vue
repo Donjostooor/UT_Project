@@ -3,11 +3,11 @@
         <div class="row">
             <!-- Pick Your images-->
             <div class="col-12">
-                <div class="col-12" data-aos="zoom-out">
+                <div class="col-12" data-aos="zoom-out" data-aos-delay="1500">
                     <h5><strong>Upload your File :</strong></h5>
                 </div>
                 <div class="drag-area" :class="{ active: isDragActive }" @dragover.prevent="onDragOver"
-                    @dragleave="onDragLeave" @drop="onDrop" data-aos="zoom-out">
+                    @dragleave="onDragLeave" @drop="onDrop" data-aos="zoom-out" data-aos-delay="1500">
                     <div v-if="imageSrc === null" class="icon">
                         <i class="bi bi-images"></i>
                     </div>
@@ -45,34 +45,28 @@
 
                     <!-- Show Result Head -->
                     <div class="col-12 sc-result-head">
-                        <div class="col-1">
-                            <h5><strong></strong></h5>
-                        </div>
-                        <div class="col-7">
-                            <p><strong>FoodName</strong></p>
-                        </div>
-                        <div class="col-4">
-                            <p><strong>Prediction Value <span>%</span></strong></p>
-                        </div>
+                        &nbsp;
                     </div>
 
                     <!-- Show Result Body -->
                     <div class="col-12 sc-result-body">
-                        <div class="col-1 p-2">
-                            <h5><strong></strong></h5>
+                        <div class="col-5 text-right">
+                            <h5>จากการประมวลผลภาพนี้คือ :&nbsp;</h5>
                         </div>
-                        <div class="col-7">
-                            <h5 v-if="showOption === false"><strong>{{ maxClassName }}</strong></h5>
-                            <select v-if="showOption === true" id="option-Fname" name="option-Fname"
-                                class="form-select form-select" aria-label=".form-select-lg example"
-                                @change="onOptionChange($event)">
-                                <option :value="maxClassName" selected>{{ maxClassName }}</option>
-                                <option v-for="(foodName, index) in FoodName" :key="index" :value="foodName">{{ foodName }}
-                                </option>
-                            </select>
-                        </div>
-                        <div class="col-4">
-                            <h5>&nbsp;<strong>{{ maxProbability * 100 }}</strong></h5>
+                        <div class="col-6 ">
+                            <div class="col-12" >
+                                <img v-if="maxProbability === 0" class="img load" src="../assets/loading2.gif" alt="loading..." />
+                            </div>
+                            <div class="col-12 justify-content-center" v-if="maxProbability !== 0">
+                                <h5 v-if="showOption === false"><strong>{{ maxClassName }}</strong></h5>
+                                <select v-if="showOption === true" id="option-Fname" name="option-Fname"
+                                    class="form-select" aria-label=".form-select-lg example"
+                                    @change="onOptionChange($event)">
+                                    <option :value="maxClassName" selected>{{ maxClassName }}</option>
+                                    <option v-for="(foodName, index) in FoodName" :key="index" :value="foodName">{{ foodName }}
+                                    </option>
+                                </select>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -373,7 +367,7 @@ export default {
                 this.isDragActive = false;
             }
         },
-        async predict(imageFile) {
+        async predict(imageFile, event) {
             const modelURL = this.m_model + "model.json";
             const metadataURL = this.m_model + "metadata.json";
 
@@ -403,6 +397,7 @@ export default {
                     console.log("find the maxValue Working..");
                 }
             }
+            
 
             // convert max f_code to max f_name 
             for (let j = 0; j < this.f_name.length; j++) {
@@ -424,6 +419,7 @@ export default {
                     }
                 }
             }
+
             // gen list 
             for (let j = 0; j < this.f_code.length; j++) {
                 classid = j + 1;
@@ -435,6 +431,7 @@ export default {
             this.Prediction = ProbabilityCH;
             this.maxClassName = maxName;
             this.maxProbability = maxProbability.toFixed(3);
+            await this.onSetupCarbon(event);
         },
         async deleteImage(event) {
             this.imageSrc = null;
@@ -443,23 +440,27 @@ export default {
             await this.onCloseOption(event);
             console.log("delete Working..");
         },
-        async onSetupFrom(event) {
-            //set pd_carbon
+
+        onSetupCarbon() {
             let pd_carbon = 0;
             for (let j = 0; j < this.f_code.length; j++) {
                 for (let i = 0; i < this.f_name.length; i++) {
                     if (this.maxClassName === this.f_name[i]) {
                         pd_carbon = this.f_carbon[i];
+                        console.log("OptionChange Working2..");
                         break; // Exit the loop once a match is found
                     }
                 }
             }
-            console.log("pd_carbon:", pd_carbon);
+            this.from.pd_carbon = pd_carbon;
+        },
 
+        async onSetupFrom(event) {
+            //set pd_carbon
             this.from.pd_userid = 1;
             this.from.pd_name = this.maxClassName;
             this.from.pd_code = this.f_code[this.FoodName.indexOf(this.maxClassName)];
-            this.from.pd_carbon = pd_carbon;
+            //this.from.pd_carbon = pd_carbon;
             this.from.pd_predict = parseFloat(this.maxProbability) * 100;
 
             await this.onSubmitPrediction(event);
@@ -500,4 +501,8 @@ export default {
 };
 
 </script>
-<style></style>
+<style>
+.load {
+    height: 40px;
+}
+</style>
