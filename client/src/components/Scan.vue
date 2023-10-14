@@ -30,7 +30,7 @@
 import Loading from '/src/view/Loading.vue';
 import Navbar from '/src/components/Nav/Navbar.vue';
 import Footer from '/src/components/Nav/Footer.vue';
-import Upload from '../components/Upload.vue'
+import Upload from '/src/components/Upload.vue'
 window.scrollTo(0, 0);
     window.onbeforeunload = function () {
     window.scrollTo(0, 0);

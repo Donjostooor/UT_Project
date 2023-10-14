@@ -255,7 +255,7 @@ export default {
         return {
             //in post
             from: {
-                pd_userid: 1,
+                pd_userid: "",
                 pd_name: "",
                 pd_code: "",
                 pd_carbon: 0,
@@ -282,6 +282,7 @@ export default {
             Prediction: [],
             showValue: false,
             showOption: false,
+            checke_store: false,
         };
     },
     methods: {
@@ -385,6 +386,17 @@ export default {
             let ProbabilityCH = [];
             let NameCH = [];
 
+            this.from.pd_userid = this.$store.state.auth.user.user.u_id;
+
+                if (this.pd_userid == null) {
+                    this.checke_store = false;
+                    console.log("Check Working..");
+                }else {
+                    this.checke_store = true;
+                    console.log("Check Not Working..");
+                }
+                
+
             // find the maxValue
             for (let i = 0; i < maxPredictions; i++) {
                 //const classPrediction = prediction[i].className + ": " + prediction[i].probability.toFixed(3);
@@ -431,6 +443,7 @@ export default {
             this.Prediction = ProbabilityCH;
             this.maxClassName = maxName;
             this.maxProbability = maxProbability.toFixed(3);
+            
             await this.onSetupCarbon(event);
         },
         async deleteImage(event) {
@@ -447,7 +460,7 @@ export default {
                 for (let i = 0; i < this.f_name.length; i++) {
                     if (this.maxClassName === this.f_name[i]) {
                         pd_carbon = this.f_carbon[i];
-                        console.log("OptionChange Working2..");
+                        console.log("onSetupCarbon Working..");
                         break; // Exit the loop once a match is found
                     }
                 }
@@ -457,7 +470,6 @@ export default {
 
         async onSetupFrom(event) {
             //set pd_carbon
-            this.from.pd_userid = 1;
             this.from.pd_name = this.maxClassName;
             this.from.pd_code = this.f_code[this.FoodName.indexOf(this.maxClassName)];
             //this.from.pd_carbon = pd_carbon;
@@ -503,6 +515,6 @@ export default {
 </script>
 <style>
 .load {
-    height: 40px;
+    height: 40px ;
 }
 </style>

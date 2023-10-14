@@ -1,4 +1,5 @@
 <template>
+    <Loading />
     <div class="wrapper">
         <section class="section section-shaped section-lg">
             <div class="shape shape-style-1 bg-gradient-default">
@@ -11,56 +12,64 @@
                 <span></span>
                 <span></span>
             </div>
-            <div class="container pt-lg-7">
-                <div class="row justify-content-center">
-                    <div class="col-lg-5">
+            <div class="container ">
+                <div class="row justify-content-center ">
+                    <div class="col-lg-5 re">
                         <div class="card bg-secondary shadow border-0">
                             <div class="card-body px-lg-5 py-lg-5">
                                 <div class="text-center text-muted mb-4">
                                     <h3><strong>Register</strong></h3>
                                 </div>
-                                <form role="form">
+                                <form @submit.prevent="submitForm">
                                     <div class="form-group focused">
                                         <div class="input-group input-group-alternative mb-3">
                                             <div class="input-group-prepend">
-                                                <span class="input-group-text"><i class="bi bi-caret-right-square"/></span>
+                                                <span class="input-group-text"><i
+                                                        class="bi bi-caret-right-square"></i></span>
                                             </div>
-                                            <input class="form-control" placeholder="Name" type="text">
+                                            <input v-model="formData.u_name" class="form-control" placeholder="Name"
+                                                type="text">
                                         </div>
                                     </div>
                                     <div class="form-group focused">
                                         <div class="input-group input-group-alternative mb-3">
                                             <div class="input-group-prepend">
-                                                <span class="input-group-text"><i class="bi bi-caret-right-square"/></span>
+                                                <span class="input-group-text"><i
+                                                        class="bi bi-caret-right-square"></i></span>
                                             </div>
-                                            <input class="form-control" placeholder="LastName" type="text">
+                                            <input v-model="formData.u_lastname" class="form-control" placeholder="LastName"
+                                                type="text">
                                         </div>
                                     </div>
                                     <div class="form-group focused">
                                         <div class="input-group input-group-alternative mb-3">
                                             <div class="input-group-prepend">
-                                                <span class="input-group-text"><i class="bi bi-envelope"/></span>
+                                                <span class="input-group-text"><i class="bi bi-envelope"></i></span>
                                             </div>
-                                            <input class="form-control" placeholder="Email" type="email">
+                                            <input v-model="formData.u_email" class="form-control" placeholder="Email"
+                                                type="email">
                                         </div>
                                     </div>
                                     <div class="form-group focused">
                                         <div class="input-group input-group-alternative">
                                             <div class="input-group-prepend">
-                                                <span class="input-group-text"><i class="bi bi-unlock"/></span>
+                                                <span class="input-group-text"><i class="bi bi-unlock"></i></span>
                                             </div>
-                                            <input class="form-control" placeholder="Password" type="password">
+                                            <input v-model="formData.u_password" class="form-control" placeholder="Password"
+                                                type="password">
                                         </div>
                                     </div>
                                     <div class="form-group focused">
                                         <div class="input-group input-group-alternative">
-                                            <VueDatePicker v-model="date" model-type="dd.MM.yyyy" placeholder="Select Your Birthday"/>
+                                            <VueDatePicker v-model="formData.u_birthday" 
+                                                placeholder="Select Your Birthday"/>
                                         </div>
                                     </div>
                                     <div class="form-group focused">
                                         <div class="input-group input-group-alternative" placeholder="">
-                                            <select class="form-select" aria-label="Default select example">
-                                                <option selected> -- Select Your Gender </option>
+                                            <select v-model="formData.u_gender" class="form-select"
+                                                aria-label="Default select example">
+                                                <option value=""> -- Select Your Gender -- </option>
                                                 <option value="Male">Male</option>
                                                 <option value="Female">Female</option>
                                             </select>
@@ -68,8 +77,9 @@
                                     </div>
                                     <div class="form-group focused">
                                         <div class="input-group input-group-alternative">
-                                            <select class="form-select" aria-label="Default select example">
-                                                <option selected> -- Select Your Location </option>
+                                            <select v-model="formData.u_location" class="form-select"
+                                                aria-label="Default select example">
+                                                <option value=""> -- Select Your Location -- </option>
                                                 <option v-for="(location, index) in Location" :key="index"
                                                     :value="location">{{ location }}
                                                 </option>
@@ -78,7 +88,7 @@
                                     </div>
 
                                     <div class="text-center">
-                                        <button type="button" class="btn btn-primary mt-4">Create account</button>
+                                        <button type="submit" class="btn btn-primary mt-4">Create account</button>
                                     </div>
                                 </form>
                             </div>
@@ -88,17 +98,58 @@
             </div>
         </section>
     </div>
+    <Footer />
 </template>
 <script>
+import Loading from '/src/view/Loading.vue';
+import Footer from '../components/Nav/Footer.vue';
 import VueDatePicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css';
 import { ref } from 'vue';
+import { useRouter } from 'vue-router';
+import axios from 'axios';
 
 export default {
     el: 'Register',
 
     components: {
-        VueDatePicker
+        VueDatePicker,
+        Loading,
+        Footer,
+    },
+    setup() {
+        const router = useRouter();
+        const formData = ref({
+            u_name: '',
+            u_lastname: '',
+            u_email: '',
+            u_password: '',
+            u_birthday: '',
+            u_gender: '',
+            u_location: '',
+            u_img: null,
+        });
+
+        const submitForm = async () => {
+            try {
+                formData.u_birthday = new Date(formData.u_birthday);
+                const response = await axios.post('http://localhost:3036/user/new_user', formData.value);
+                if (response.status === 201) {
+                    // Handle successful registration, e.g., redirect to login page
+                    await router.push('/login');
+                } else {
+                    // Handle errors
+                    console.error('Registration failed');
+                }
+            } catch (error) {
+                console.error('An error occurred:', error);
+            }
+        };
+
+        return {
+            formData,
+            submitForm,
+        };
     },
 
     data() {
@@ -184,7 +235,14 @@ export default {
                 'สุราษฎร์ธานี Surat Thani |  Thailand',
             ],
         };
-    }, 
+    },
+
 };
+
+
 </script>
-<style></style>
+<style>
+.section {
+    height: 110vh;
+}
+</style>

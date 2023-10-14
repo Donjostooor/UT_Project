@@ -11,7 +11,7 @@
                     <br />
                     <h2 data-aos="fade-up" data-aos-delay="1700">Using less Carbon is better, Helping to save the world</h2>
                     <div data-aos="fade-up" data-aos-delay="2200">
-                        <a href="/carbonscan" class="btn-get-started"><b>CARBON SCAN</b></a>
+                        <router-link to="/carbonscan" class="btn-get-started"><b>CARBON SCAN</b></router-link>
                     </div>
                 </div>
                 <div class="col-lg-5"></div>
@@ -142,14 +142,27 @@
     <!-- ======= End Food list supported Section ======= -->
 </template>
 
-<script setup>
+<script>
 import Loading from '/src/view/Loading.vue';
 import Navbar from '/src/components/Nav/Navbar.vue';
 import Footer from '/src/components/Nav/Footer.vue';
-import FoodSupport from '../components/AboutFood.vue'
-window.scrollTo(0, 0);
-window.onbeforeunload = function () {
-    window.scrollTo(0, 0);
+import FoodSupport from '/src/components/AboutFood.vue'
+import axios from 'axios';
+
+export default {
+    name: 'Home',
+    components: {
+        Loading,
+        Navbar,
+        Footer,
+        FoodSupport,
+    },
+    mounted() {
+        window.scrollTo(0, 0);
+        window.onbeforeunload = function () {
+            window.scrollTo(0, 0);
+        }
+    }
 }
 </script>
 
