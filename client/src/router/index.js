@@ -17,16 +17,13 @@ const router = createRouter({
         //Log-in - Register
         { path: '/login', name: 'login', component: Login },
         { path: '/register', name: 'register', component: Register },
-        {
-            path: '/profile',
-            name: 'profile',
-            // lazy-loaded
-            component: Profile
-        },
+
+        //LazyLoad
+        { path: '/profile', name: 'profile', component: Profile },
 
     ]
 })
-/*
+
 router.beforeEach((to, from, next) => {
     const publicPages = ['/login', '/register', '/', '/carbonscan'];
     const authRequired = !publicPages.includes(to.path);
@@ -39,7 +36,7 @@ router.beforeEach((to, from, next) => {
     } else {
         next();
     }
-});*/
+});
 
 export default router
 

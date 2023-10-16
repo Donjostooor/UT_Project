@@ -19,7 +19,7 @@
                             <a class="nav-link mb-sm-3 mb-md-0" id="tabs-icons-text-2-tab" data-toggle="tab"
                                 href="#tabs-icons-text-2" role="tab" aria-controls="tabs-icons-text-2"
                                 aria-selected="false"><i
-                                    class="bi bi-cup-hot-fill"></i>&nbsp;&nbsp;&nbsp;<strong>ชนิดอาหารที่ท่านประทาน</strong></a>
+                                    class="bi bi-cup-hot-fill"></i>&nbsp;&nbsp;&nbsp;<strong>ชนิดอาหารที่รับท่านประทาน</strong></a>
                         </li>
 
                     </ul>
