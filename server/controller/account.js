@@ -19,7 +19,6 @@ function account(app, connection) {
                 }
                 else {
                     const user = result[0];
-                    const u_id = user.u_id;
                     if (u_password === user.u_password) {
                         const accessToken = jwt.sign({ user: user }, secretKey, {
                             expiresIn: "1h",
@@ -46,13 +45,16 @@ function account(app, connection) {
                 };
                 if (result.length === 0) {
                     res.status(401).json({ message: 'Invalid credentials' });
-                } else {
+                }
+                else {
                     const admin = result[0];
                     if (admin_password === admin.admin_password) {
-                        req.session.id = admin.admin_id;
-                        res.json(req.session.id);
+                        const accessToken = jwt.sign({ admin: admin }, secretKey, {
+                            expiresIn: "1h",
+                        });
+                        res.json({ message: "Login Admin successful", accessToken , admin});
                     } else {
-                        res.status(401).json({ message: 'Email Or Password Wrong' });
+                        res.status(401).json({ msg: 'Email Or Password Wrong' });
                     }
                 }
             }

@@ -54,16 +54,17 @@
                             <h5>จากการประมวลผลภาพนี้คือ :&nbsp;</h5>
                         </div>
                         <div class="col-6 ">
-                            <div class="col-12" >
-                                <img v-if="maxProbability === 0" class="img load" src="../assets/loading2.gif" alt="loading..." />
+                            <div class="col-12">
+                                <img v-if="maxProbability === 0" class="img load" src="../assets/loading2.gif"
+                                    alt="loading..." />
                             </div>
                             <div class="col-12 justify-content-center" v-if="maxProbability !== 0">
                                 <h5 v-if="showOption === false"><strong>{{ maxClassName }}</strong></h5>
-                                <select v-if="showOption === true" id="option-Fname" name="option-Fname"
-                                    class="form-select" aria-label=".form-select-lg example"
-                                    @change="onOptionChange($event)">
+                                <select v-if="showOption === true" id="option-Fname" name="option-Fname" class="form-select"
+                                    aria-label=".form-select-lg example" @change="onOptionChange($event)">
                                     <option :value="maxClassName" selected>{{ maxClassName }}</option>
-                                    <option v-for="(foodName, index) in FoodName" :key="index" :value="foodName">{{ foodName }}
+                                    <option v-for="(foodName, index) in FoodName" :key="index" :value="foodName">{{ foodName
+                                    }}
                                     </option>
                                 </select>
                             </div>
@@ -156,7 +157,7 @@
                                             <div class="col-8">
                                                 <!-- image -->
                                                 <div class="col-12 text-center">
-                                                    <img class="img-scan" :src="imageSrc" alt="Uploaded Image"  />
+                                                    <img class="img-scan" :src="imageSrc" alt="Uploaded Image" />
                                                 </div>
                                                 <!-- foodname -->
                                                 <div class="col-12 text-center">
@@ -203,10 +204,16 @@
                                             </div>
                                             <!-- btn -->
                                             <div class="col-12 d-flex justify-content-center">
-                                                <button type="button" class="col-5 btn btn-success" data-bs-target="#SaveSuccess" data-bs-toggle="modal" data-bs-dismiss="modal" @click="onSetupFrom">Save</button>
+                                                <button v-if="cerrentUserID" type="button" class="col-5 btn btn-success"
+                                                    data-bs-target="#SaveSuccess" data-bs-toggle="modal"
+                                                    data-bs-dismiss="modal" @click="onSetupFrom">
+                                                    Save
+                                                </button>
                                                 <div class="col-1">&nbsp;</div>
                                                 <button type="button" class="col-5 btn btn-secondary"
-                                                    data-bs-dismiss="modal" @click="onCloseAllValue">Close</button>
+                                                    data-bs-dismiss="modal" @click="onCloseAllValue">
+                                                    Close
+                                                </button>
                                             </div>
                                         </div>
                                     </div>
@@ -216,8 +223,7 @@
                     </div>
                 </div>
             </div>
-            <div class="modal fade" id="SaveSuccess" aria-hidden="true" aria-labelledby="SaveSuccess"
-                tabindex="-1">
+            <div class="modal fade" id="SaveSuccess" aria-hidden="true" aria-labelledby="SaveSuccess" tabindex="-1">
                 <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -284,6 +290,14 @@ export default {
             showOption: false,
             checke_store: false,
         };
+    },
+    computed: {
+        cerrentUserID() {
+            if (this.$store.state.auth.user && this.$store.state.auth.user.user && this.$store.state.auth.user.user.u_id) {
+                return this.$store.state.auth.user.user.u_id;
+            }
+            return null;
+        }
     },
     methods: {
         //All VALUES in Table
@@ -386,16 +400,16 @@ export default {
             let ProbabilityCH = [];
             let NameCH = [];
 
-            this.from.pd_userid = this.$store.state.auth.user.user.u_id;
+            this.from.pd_userid = this.cerrentUserID;
 
-                if (this.pd_userid == null) {
-                    this.checke_store = false;
-                    console.log("Check Working..");
-                }else {
-                    this.checke_store = true;
-                    console.log("Check Not Working..");
-                }
-                
+            if (this.pd_userid == null) {
+                this.checke_store = false;
+                console.log("Check Working..");
+            } else {
+                this.checke_store = true;
+                console.log("Check Not Working..");
+            }
+
 
             // find the maxValue
             for (let i = 0; i < maxPredictions; i++) {
@@ -409,7 +423,7 @@ export default {
                     console.log("find the maxValue Working..");
                 }
             }
-            
+
 
             // convert max f_code to max f_name 
             for (let j = 0; j < this.f_name.length; j++) {
@@ -443,7 +457,7 @@ export default {
             this.Prediction = ProbabilityCH;
             this.maxClassName = maxName;
             this.maxProbability = maxProbability.toFixed(3);
-            
+
             await this.onSetupCarbon(event);
         },
         async deleteImage(event) {
@@ -515,6 +529,6 @@ export default {
 </script>
 <style>
 .load {
-    height: 40px ;
+    height: 40px;
 }
 </style>

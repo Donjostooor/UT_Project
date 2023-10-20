@@ -61,8 +61,8 @@
                                     </div>
                                     <div class="form-group focused">
                                         <div class="input-group input-group-alternative">
-                                            <VueDatePicker v-model="formData.u_birthday" 
-                                                placeholder="Select Your Birthday"/>
+                                            <VueDatePicker v-model="formData.u_birthday"
+                                                placeholder="Select Your Birthday" />
                                         </div>
                                     </div>
                                     <div class="form-group focused">
@@ -88,7 +88,9 @@
                                     </div>
 
                                     <div class="text-center">
-                                        <button type="submit" class="btn btn-primary mt-4">Create account</button>
+                                        <button type="submit" class="btn btn-primary my-4">Create account</button>
+                                        <router-link to="/login"><button type="button"
+                                                class="btn btn-primary my-4">Login</button></router-link>
                                     </div>
                                 </form>
                             </div>
@@ -236,13 +238,12 @@ export default {
             ],
         };
     },
-
 };
 
 
 </script>
-<style>
+<style scoped>
 .section {
-    height: 110vh;
+    height: 120vh;
 }
 </style>

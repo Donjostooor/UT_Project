@@ -56,37 +56,39 @@ function userRouter(app, connection) {
     }) 
     // Update User Record
     app.patch("/user/update/:u_id", async (req, res) => {
-        const { u_id } = req.params;
-        const { u_email, u_password, u_name, u_lastname, u_birthday, u_gender, u_location, u_img } = req.body;
-    
-        try {
-            // Check if the specified u_id exists in the user table
-            const userCheckQuery = "SELECT * FROM user WHERE u_id = ?";
-            connection.query(userCheckQuery, [u_id], (userCheckErr, userCheckResults) => {
-                if (userCheckErr) {
-                    console.log("Error checking user table", userCheckErr);
-                    return res.status(500).send();
+    const u_id = req.params.u_id;
+    const { u_email, u_password, u_name, u_lastname, u_birthday, u_gender, u_location, u_img } = req.body;
+
+    try {
+        // Check if the specified u_id exists in the user table
+        const userCheckQuery = "SELECT * FROM user WHERE u_id = ?";
+        connection.query(userCheckQuery, [u_id], (userCheckErr, userCheckResults) => {
+            if (userCheckErr) {
+                console.log("Error checking user table", userCheckErr);
+                return res.status(500).json({ error: "Internal Server Error" });
+            }
+
+            if (userCheckResults.length === 0) {
+                return res.status(404).json({ error: "User account not found" });
+            }
+
+            // Update data in the user table
+            const userUpdateQuery = "UPDATE user SET u_email=?, u_password=?, u_name=?, u_lastname=?, u_birthday=?, u_gender=?, u_location=?, u_img=? WHERE u_id = ?";
+            connection.query(userUpdateQuery, [u_email, u_password, u_name, u_lastname, u_birthday, u_gender, u_location, u_img, u_id], (userUpdateErr) => {
+                if (userUpdateErr) {
+                    console.log("Error updating user account table", userUpdateErr);
+                    return res.status(500).json({ error: "Internal Server Error" });
                 }
-    
-                if (userCheckResults.length === 0) {
-                    return res.status(404).json({ error: "User account not found" });
-                }
-    
-                // Update data in the menu table
-                const userUpdateQuery = "UPDATE user SET u_email=?, u_password=?, u_name=?, u_lastname=?, u_birthday=?, u_gender=?, u_location=?, u_img=? WHERE u_id = ?";
-                connection.query(userUpdateQuery, [u_email, u_password, u_name, u_lastname, u_birthday, u_gender, u_location, u_img], (userUpdateErr) => {
-                    if (userUpdateErr) {
-                        console.log("Error updating user account table", userUpdateErr);
-                        return res.status(500).send();
-                    }
-                        return res.status(200).json({ msg: "User account updated successfully" });
-                });
+
+                return res.status(200).json({ msg: "User account updated successfully" });
             });
-        } catch (err) {
-            console.log(err);
-            return res.status(500).send();
-        }
-    });
+        });
+    } catch (err) {
+        console.log(err);
+        return res.status(500).json({ error: "Internal Server Error" });
+    }
+});
+
 
     // Delete User Record
     app.delete("/user/delete/:u_id", async (req, res) => {

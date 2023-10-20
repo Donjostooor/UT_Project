@@ -55,13 +55,13 @@ function predictRouter(app, connection) {
             }
         }) 
     // Delete predict
-    app.delete("/predict/delete/:pd_userid", async (req, res) => {
-        const { pd_userid } = req.params;
+    app.delete("/predict/delete/:pd_id", async (req, res) => {
+        const { pd_id } = req.params;
     
         try {
             // Check if the specified u_id exists in the user table
-            const userCheckQuery = "SELECT * FROM predict WHERE pd_userid = ?";
-            connection.query(userCheckQuery, [pd_userid], (userCheckErr, userCheckResults) => {
+            const userCheckQuery = "SELECT * FROM predict WHERE pd_id = ?";
+            connection.query(userCheckQuery, [pd_id], (userCheckErr, userCheckResults) => {
                 if (userCheckErr) {
                     console.log("Error checking predict table", userCheckErr);
                     return res.status(500).send();
@@ -72,16 +72,16 @@ function predictRouter(app, connection) {
                 }
     
                 // Delete data from the user table
-                const userDeleteQuery = "DELETE FROM predict WHERE pd_userid = ?";
-                connection.query(userDeleteQuery, [pd_userid], (userDeleteErr) => {
+                const userDeleteQuery = "DELETE FROM predict WHERE pd_id = ?";
+                connection.query(userDeleteQuery, [pd_id], (userDeleteErr) => {
                     if (userDeleteErr) {
                         console.log("Error deleting predict in table", userDeleteErr);
                         return res.status(500).send();
                     }
     
                     // Delete data from the user table
-                    const userDeleteQuery = "DELETE FROM predict WHERE pd_userid = ?";
-                    connection.query(userDeleteQuery, [pd_userid], (userDeleteErr) => {
+                    const userDeleteQuery = "DELETE FROM predict WHERE pd_id = ?";
+                    connection.query(userDeleteQuery, [pd_id], (userDeleteErr) => {
                         if (userDeleteErr) {
                             console.log("Error deleting predict table", userDeleteErr);
                             return res.status(500).send();

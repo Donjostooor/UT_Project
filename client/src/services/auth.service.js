@@ -17,6 +17,20 @@ class AuthService {
                 return response.data;
             });
     }
+    loginAdmin(user) {
+        return axios
+            .post(API_URL + 'admin/login', {
+                admin_user: user.admin_user,
+                admin_password: user.admin_password
+            })
+            .then(response => {
+                if (response.data.accessToken) {
+                    localStorage.setItem('token', response.data.token);
+                }
+
+                return response.data;
+            });
+    }
 
     logout() {
         localStorage.removeItem('user');

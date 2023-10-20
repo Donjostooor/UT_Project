@@ -5,7 +5,10 @@ import Home from '/src/view/HomeView.vue'
 import Scan from '/src/components/Scan.vue'
 import Login from '/src/view/Login.vue'
 import Register from '/src/view/Register.vue'
-import Profile from '/src/components/Profile.vue'
+import Profile from '/src/components/User/Profile.vue'
+import EditProfile from '/src/components/User/EditProfile.vue'
+import DashBoard from '/src/components/Admin/DashBoard.vue'
+import LoginAdmin from '/src/view/LoginAdmin.vue'
 
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
@@ -18,12 +21,18 @@ const router = createRouter({
         { path: '/login', name: 'login', component: Login },
         { path: '/register', name: 'register', component: Register },
 
-        //LazyLoad
+        //User
         { path: '/profile', name: 'profile', component: Profile },
+        { path: '/edit', name: 'edit', component: EditProfile },
+
+        //Admin 
+        { path: '/admin/login', name: 'adminlogin', component: LoginAdmin },
+        { path: '/admin/dashboard', name: 'dashboard', component: DashBoard },
+        //optional
 
     ]
 })
-
+/*
 router.beforeEach((to, from, next) => {
     const publicPages = ['/login', '/register', '/', '/carbonscan'];
     const authRequired = !publicPages.includes(to.path);
@@ -36,7 +45,7 @@ router.beforeEach((to, from, next) => {
     } else {
         next();
     }
-});
+});*/
 
 export default router
 

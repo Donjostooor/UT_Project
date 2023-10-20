@@ -1,7 +1,7 @@
 function menuRouter(app, connection) {
     // Create admin
     app.post("/menu/new_menu", async (req, res) => {
-        const { f_code, f_name, mat_name, mat_weight, mat_carbonbase, f_carbon, f_img, f_materia } = req.body;
+        const { f_code, f_name, f_carbon, f_img, f_materia } = req.body;
         console.log(req.body);
 
         try {
@@ -31,6 +31,7 @@ function menuRouter(app, connection) {
                                 } else {
                                     return res.status(201).json({ msg: "New Food added in menu successfully" });
                                 }
+                                
                             });
                         }
                     }
@@ -77,8 +78,8 @@ function menuRouter(app, connection) {
     })
     // Update menu record
     app.patch("/menu/update/:f_code", async (req, res) => {
-        const { f_code } = req.params;
-        const { f_name, mat_name, mat_carbonbase, f_carbon, f_img, f_materia } = req.body;
+        const f_code = req.params.f_code;
+        const { f_name, f_carbon, f_img, f_materia } = req.body;
 
         try {
             // Check if the specified f_code exists in the menu table
@@ -95,12 +96,12 @@ function menuRouter(app, connection) {
 
                 // Update data in the menu table
                 const menuUpdateQuery = "UPDATE menu SET f_name = ?, f_carbon = ?, f_img = ?, f_materia = ? WHERE f_code = ?";
-                connection.query(menuUpdateQuery, [f_name, f_carbon, f_img, f_code, f_materia], (menuUpdateErr) => {
+                connection.query(menuUpdateQuery, [f_name, f_carbon, f_img, f_materia, f_code], (menuUpdateErr) => {
                     if (menuUpdateErr) {
                         console.log("Error updating menu table", menuUpdateErr);
                         return res.status(500).send();
                     }
-                    return res.status(200).json({ msg: "Menu item updated successfully" });
+                    return res.status(200).json({ msg: "Menu item updated successfully"});
 
                 });
             });

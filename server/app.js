@@ -6,7 +6,6 @@ const path = require('path');
 const cookieSession = require('cookie-session');
 const bcrypt = require('bcrypt');
 const { body, validationResult } = require('express-validator');
-
 // import config 
 const dbConnection = require("./config/config")
 // import controllers

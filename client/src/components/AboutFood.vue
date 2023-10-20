@@ -16,12 +16,12 @@
                 <!-- ======= col Foodlist ======== -->
                 <div class="row">
                     <div class="foodlist">
-                        <div class="col-md-4" v-for="(card, index) in menu" :key="index" data-aos="fade-up">
+                        <div class="col-md-4" v-for="(menu, index) in menu" :key="index" data-aos="fade-up">
                             <div class="col bt">
                                 <div class="food-card">
-                                <img :src="card.f_img" class="card-img-food"/>
+                                <img :src="menu.f_img" class="card-img-food"/>
                                 <div class="food-body">
-                                    <h4 class="food-title mb-0"><strong>{{ card.f_name }}</strong></h4>
+                                    <h4 class="food-title mb-0"><strong>{{ menu.f_name }}</strong></h4>
                                 </div>
                             </div>
                             </div>
@@ -40,8 +40,6 @@ export default {
     data() {
         return {
             menu: [],
-            f_name: [],
-            f_img: [],
         };
     },
     mounted() {
@@ -51,12 +49,7 @@ export default {
             .then((response) => {
                 // Assuming the response.data is an array of objects
                 this.menu = response.data;
-                // Assuming 'f_name' and 'f_img' properties exist in each object
-                this.f_name = response.data.map((item) => item.f_name);
-                this.f_img = response.data.map((item) => item.f_img);
                 //console.log(this.menu);
-                //console.log(this.f_name);
-                //console.log(this.f_img);
             })
             .catch((error) => {
                 console.error(error);

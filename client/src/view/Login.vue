@@ -1,21 +1,8 @@
 <template>
+  <Loading />
   <section class="section section-shaped section-lg">
     <div class="shape shape-style-1 bg-gradient-default">
-      <span/>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
+      <span/><span/><span/><span/><span/><span/><span/><span/><span/>
     </div>
     <div class="container pt-lg-7">
       <div class="row justify-content-center">
@@ -50,6 +37,9 @@
                   <router-link to="/register"><button type="button"
                       class="btn btn-primary my-4">Register</button></router-link>
                 </div>
+                <div class="text-center">
+                  <router-link to="/admin/login">Log-in Admin</router-link>
+                </div>
                 <div class="form-group">
                   <div v-if="message" class="alert alert-danger" role="alert">{{ message }}</div>
                 </div>
@@ -60,11 +50,18 @@
       </div>
     </div>
   </section>
+  <Footer />
 </template>
 
 <script>
+import Loading from '/src/view/Loading.vue';
+import Footer from '/src/components/Nav/Footer.vue';
 export default {
   name: 'Login',
+  components: {
+        Loading,
+        Footer,
+    },
   data() {
     return {
       user: {
@@ -93,7 +90,7 @@ export default {
       if (this.user.u_email && this.user.u_password) {
         this.$store.dispatch('auth/login', this.user).then(
           () => {
-            this.$router.push('/');
+            this.$router.push('/profile');
           },
           error => {
             this.loading = false;
@@ -114,7 +111,7 @@ export default {
 </script>
 
 
-<style>
+<style scoped>
 .section {
   height: 100vh;
 }

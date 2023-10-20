@@ -6,7 +6,7 @@
         </div>
         <div class="container">
             <div  class="collapse navbar-collapse nav-btn" id="navbarsExample07">
-                <div v-if="!currentUser" class="col-3 nav-btn">
+                <div v-if="!cerrentUserID" class="col-3 nav-btn">
                     <a href="/login">
                         <p>Log-in</p>
                     </a>
@@ -14,9 +14,11 @@
                         <p>Register</p>
                     </a>
                 </div>
-                <div v-if="currentUser" class="col-3 nav-btn">
+                <div v-if="cerrentUserID" class="col-3 nav-btn">
                     <div class="p-2">
-                        <router-link to="/profile"><p> Username : {{ currentUser.user.u_name }} {{ currentUser.user.u_lastname }} </p></router-link>
+                        <router-link to="/profile"><p v-for="(user, index) in user" :key="index"> 
+                            {{ user.u_name }}&nbsp;&nbsp;&nbsp;{{ user.u_lastname }} 
+                        </p></router-link>
                     </div>
                     <div>
                         <a class="nav-link" @click.prevent="logOut">
@@ -29,11 +31,21 @@
     </nav>
 </template>
 <script>
+import axios from 'axios';
+
 export default {
     name: 'Navigation',
+    data() {
+        return {
+            user: [],
+        }
+    },
     computed: {
-        currentUser() {
-            return this.$store.state.auth.user;
+        cerrentUserID() {
+            if (this.$store.state.auth.user && this.$store.state.auth.user.user && this.$store.state.auth.user.user.u_id) {
+                return this.$store.state.auth.user.user.u_id;
+            }
+            return null;
         }
     },
     methods: {
@@ -41,11 +53,26 @@ export default {
             this.$store.dispatch('auth/logout');
             this.$router.push('/');
         }
+    },
+    mounted() {
+        axios.get("http://localhost:3036/user/" + this.cerrentUserID)
+            .then((response) => {
+                if (response.data.length > 0) {
+                    this.user = response.data;
+                    console.log("HTTP request completed");
+                    //console.log(this.user);
+                } else {
+                    console.error("No predict data found for the user");
+                }
+            })
+            .catch((error) => {
+                console.error("An error occurred:", error);
+            });
     }
 };
 </script>
 
-<style>
+<style scoped>
 .the-blur {
     position: fixed;
     top: 0;
