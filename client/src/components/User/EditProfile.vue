@@ -18,7 +18,7 @@
                         <div class="card bg-secondary shadow border-0">
                             <div class="card-body px-lg-5 py-lg-5">
                                 <div class="text-center text-muted mb-4">
-                                    <h3><strong>Edit Your Profile</strong></h3>
+                                    <h3><strong>แก้ไขบัญชีผู้ใช้ของคุณ</strong></h3>
                                 </div>
                                 <form @submit.prevent="submitForm">
                                     <div class="form-group focused">

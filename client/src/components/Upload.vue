@@ -4,7 +4,7 @@
             <!-- Pick Your images-->
             <div class="col-12">
                 <div class="col-12" data-aos="zoom-out" data-aos-delay="1500">
-                    <h5><strong>Upload your File :</strong></h5>
+                    <h5><strong>อัปโหลดรูปภาพของคุณ :</strong></h5>
                 </div>
                 <div class="drag-area" :class="{ active: isDragActive }" @dragover.prevent="onDragOver"
                     @dragleave="onDragLeave" @drop="onDrop" data-aos="zoom-out" data-aos-delay="1500">

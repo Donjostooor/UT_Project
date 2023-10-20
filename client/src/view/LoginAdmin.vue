@@ -37,8 +37,6 @@
                                 </div>
                                 <div class="text-center">
                                     <button type="submit" class="btn btn-primary my-4">Log-in</button>
-                                    <router-link to="/register"><button type="button"
-                                            class="btn btn-primary my-4">Register</button></router-link>
                                 </div>
                                 <div class="text-center">
                                     <router-link to="/login">Log-in User</router-link>

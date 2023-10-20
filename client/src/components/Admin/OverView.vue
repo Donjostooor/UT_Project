@@ -32,12 +32,12 @@
         </div>
         <br>
         <div class="col-12 card-body">
-            <h1 class="display-4">Table of Carbon User Result</h1>
+            <h1 class="display-4">ตารางผลลัพธ์คาร์บอนของผู้ใช้</h1>
             <ChartCarbon />
         </div>
         <br>
         <div class="col-12 card-body">
-            <h1 class="display-4">History of Carbon User Result</h1>
+            <h1 class="display-4">ประวัติผลลัพธ์คาร์บอนของผู้ใช้</h1>
             <br>
             <div class="col-12 d-flex">
                 <div class="col-1">

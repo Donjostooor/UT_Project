@@ -86,7 +86,7 @@
                     <h5><strong>Location</strong></h5>
                 </div>
                 <div class="col-2 text-center">
-                    <h5><strong>FX</strong></h5>
+                    <h5><strong></strong></h5>
                 </div>
             </div><br>
             <div class="col-12 d-flex" v-for="(user, index) in user.slice(0, 60).reverse()" :key="index">

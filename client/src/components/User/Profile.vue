@@ -20,17 +20,17 @@
                                 <h6 class="text-uppercase text-muted font-weight-bold">User ID : {{ from.u_id }}</h6>
                             </div>
                         </div>
-                        <div class="col-6 ">
+                        <div class="col- ">
                             <div class="col-12 pro_body_center">
                                 <h3 class="text-uppercase font-weight-bold" v-for="(user, index) in user" :key="index">{{ user.u_name }} &nbsp; {{ user.u_lastname }}
                                 </h3>
                             </div>
                             <div class="col-12 body_context">
                                 <br>
-                                <h5 class="body_context_text" v-for="(user, index) in user" :key="index">Ages: {{ age }}</h5>
-                                <h5 class="body_context_text" v-for="(user, index) in user" :key="index">Birthday: {{ formattedBirthday }}</h5>
-                                <h5 class="body_context_text" v-for="(user, index) in user" :key="index">Gender : {{ user.u_gender }}</h5>
-                                <h5 class="body_context_text" v-for="(user, index) in user" :key="index">Location : {{ user.u_location }}</h5>
+                                <h5 class="body_context_text" v-for="(user, index) in user" :key="index">อายุ : {{ age }}</h5>
+                                <h5 class="body_context_text" v-for="(user, index) in user" :key="index">วันเกิด : {{ formattedBirthday }}</h5>
+                                <h5 class="body_context_text" v-for="(user, index) in user" :key="index">เพศ : {{ user.u_gender }}</h5>
+                                <h5 class="body_context_text" v-for="(user, index) in user" :key="index">ที่อยู่ : {{ user.u_location }}</h5>
                             </div>
                         </div>
                         <div class="col-2 text-center">
@@ -50,7 +50,7 @@
                     <div class="col-1">&nbsp;</div>
                     <div class="col-10 pro_table_body">
                         <div class="col-12">
-                            <h4 class=" body_context_text font-weight-bold ">History Result Carbonfootprint <sub>
+                            <h4 class=" body_context_text font-weight-bold ">ประวัติผลลัพธ์คาร์บอนฟุตพริ้นท์ <sub>
                                     <p>limit value 30</p>
                                 </sub></h4>
                         </div>
@@ -306,7 +306,7 @@ export default {
 
 .img_profile_body {
     z-index: 1;
-    margin-top: -180px;
+    margin-top: -200px;
     display: flex;
     align-items: center;
     flex-direction: column;
@@ -340,7 +340,7 @@ export default {
 
 .pro_btn_add {
     width: 200px;
-    margin-top: 240px;
+    margin-top: 350px;
     margin-left: -50px;
 }
 
@@ -357,7 +357,4 @@ export default {
     box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.3);
 }
 
-.body_context_btn {
-    padding-right: 8px;
-}
 </style>

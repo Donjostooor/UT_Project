@@ -13,6 +13,9 @@
                     <div data-aos="fade-up" data-aos-delay="2200">
                         <router-link to="/carbonscan" class="btn-get-started"><b>CARBON SCAN</b></router-link>
                     </div>
+                    <div class="text-sup" data-aos="fade-up" data-aos-delay="2200">
+                        <p><a href="#FoodSupport">รายการอาหารที่รองรับ</a></p>
+                    </div>
                 </div>
                 <div class="col-lg-5"></div>
             </div>
@@ -103,8 +106,7 @@
                     <div class="content text-center" data-aos="fade-in" data-aos-delay="500">
                         <span class="badge badge-pill badge-success text-uppercase">Benefits</span>
                         <h2 class="display-2">
-                            <i class="bi bi-rocket-takeoff-fill">&nbsp;</i>Benefits of this
-                            WebApp
+                            <i class="bi bi-rocket-takeoff-fill">&nbsp;</i>ประโยชน์ของ WebApp นี้
                         </h2>
                         <br />
                     </div>
@@ -136,7 +138,7 @@
     <!-- End Benefits of this WebApp Section -->
     <!-- ======= Food list supported Section ======= -->
     <section>
-        <div class="bodyfood">
+        <div id="FoodSupport" class="bodyfood">
             <FoodSupport />
         </div>
     </section>
@@ -177,5 +179,9 @@ export default {
 }
 .bodyfood{
     height: 470vh;
+}
+.text-sup{
+    padding-top: 10px;
+    padding-left: 100px;
 }
 </style>

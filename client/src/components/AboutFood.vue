@@ -5,7 +5,7 @@
                 <div class="col-md mx-auto text-center" data-aos="fade-up" data-aos-delay="300">
                     <span class="badge badge-pill badge-warning text-uppercase">Food list</span>
                     <h2 class="display-2">
-                        <i class="bi bi-egg-fried">&nbsp;</i>Food list supported
+                        <i class="bi bi-egg-fried">&nbsp;</i>รายการอาหารที่รองรับ
                     </h2>
                     <p class="lead" data-aos="fade-up" data-aos-delay="700">
                         "ทุกมื้ออาหารเป็นโอกาสพิเศษในการสร้างความรักและความทรงจำที่ดี."

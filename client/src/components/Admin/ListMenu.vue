@@ -5,7 +5,7 @@
             <div class="col-4 d-flex card-body">
                 <div class="col-12 card card-1">
                     <router-link to="">
-                        <h4><strong>All menu :</strong></h4>
+                        <h4><strong>All Menu :</strong></h4>
                         <h1 class="card-text"><strong>{{ menu.length }}</strong></h1>
                     </router-link>
                 </div>
@@ -32,7 +32,7 @@
                     <h5><strong>Image</strong></h5>
                 </div>
                 <div class="col-2 text-center">
-                    <h5><strong>FX</strong></h5>
+                    <h5><strong></strong></h5>
                 </div>
             </div><br>
             <div class="col-12 d-flex" v-for="(menu, index) in menu.slice(0, 60).reverse()" :key="index">

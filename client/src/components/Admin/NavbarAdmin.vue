@@ -6,7 +6,7 @@
                     <div class="p-2">
                         <router-link to="/profile">
                             <h5 v-for="(admin, index) in admin" :key="index"> 
-                            <strong>Admin ID : </strong>{{ admin.admin_id }}&nbsp;&nbsp;&nbsp; <strong>Username : </strong>{{ admin.admin_name }} 
+                            <strong>Admin ID : </strong>{{ admin.admin_id }}&nbsp;&nbsp;|&nbsp; <strong>Username : </strong>{{ admin.admin_name }} 
                         </h5></router-link>
                     </div>
                     <div >
